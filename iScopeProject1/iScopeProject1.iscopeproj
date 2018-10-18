@@ -1,0 +1,60 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>1cf8bdfa-4c93-41d8-a83b-e476ca5c8493</ProjectGuid>
+    <OutputType>File</OutputType>
+    <AssemblyName>
+    </AssemblyName>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <IsIScope>true</IsIScope>
+    <IsInteractiveQuery>true</IsInteractiveQuery>
+    <Name>iScopeProject1</Name>
+    <RootNamespace>iScopeProject1</RootNamespace>
+    <VCSelectionInProjectProperty>&lt;Use Current VC in VC Selector&gt;</VCSelectionInProjectProperty>
+    <CosmosRuntimeVersion>Default</CosmosRuntimeVersion>
+    <ScopePath>%24(SCRIPT_DIR);%24(CLUSTER_ROOT);%24(SCOPE_DIR);%24(PROJECT_DIR)</ScopePath>
+    <InputStreamSearchPath>%24(PROJECT_DIR);%24(SCRIPT_DIR);%24(CLUSTER_ROOT)</InputStreamSearchPath>
+    <VertexDebugSolution>false</VertexDebugSolution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Script Include="dunningScheduleSummary.script" />
+    <Script Include="geevenScheduleDiff.script" />
+    <Script Include="iScope1.script" />
+    <Script Include="jeffScript.script" />
+    <Script Include="joshscript1.script" />
+    <Script Include="iScope2.script" />
+    <Script Include="scheduleEventsQuery.script" />
+    <Script Include="scheduleLineItems.script" />
+  </ItemGroup>
+  <ItemGroup>
+    <ScriptCode Include="dunningScheduleSummary.script.cs">
+      <DependentUpon>dunningScheduleSummary.script</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="geevenScheduleDiff.script.cs">
+      <DependentUpon>geevenScheduleDiff.script</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="iScope2.script.cs">
+      <DependentUpon>iScope2.script</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="jeffScript.script.cs">
+      <DependentUpon>jeffScript.script</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="joshscript1.script.cs">
+      <DependentUpon>joshscript1.script</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="scheduleLineItems.script.cs">
+      <DependentUpon>scheduleLineItems.script</DependentUpon>
+    </ScriptCode>
+  </ItemGroup>
+  <Import Project="$(AppData)\Microsoft\ScopeStudio\MsBuild\1.0\iScope.targets" />
+</Project>

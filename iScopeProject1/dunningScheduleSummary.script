@@ -1,0 +1,18 @@
+﻿//Script GUID:7cd1a276-ef95-456c-b78a-529a0ab46c50
+//Used for tracking history
+[SCRIPT:MAXDOP=0]
+
+//#DECLARE captureScheduleEvents string = @"shares/cp.prod/cp.prod/CashFlow/Ingestion/Output/DunningJournal20160630/2018/09/CaptureScheduleEvents_2018_09_26.ss";
+
+#DECLARE captureScheduleSummary string = @"shares/cp.prod/cp.prod/CashFlow/Ingestion/Output/DunningJournal20160630/2018/10/CaptureScheduleSummary_2018_10_10.ss";
+
+
+
+captureSchedule = SELECT CaptureSchedule 
+    FROM
+        (
+            SSTREAM @captureScheduleSummary
+        )
+    WHERE CaptureScheduleId == "1ac2197e8369382e9f692cfe8c41b0b1";
+
+OUTPUT captureSchedule TO CONSOLE;

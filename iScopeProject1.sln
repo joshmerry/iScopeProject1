@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{16730046-AB7A-431B-B756-05245A4DDAE1}") = "iScopeProject1", "iScopeProject1\iScopeProject1.iscopeproj", "{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Debug|x64.ActiveCfg = Debug|x64
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Debug|x64.Build.0 = Debug|x64
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Debug|x86.ActiveCfg = Debug|x86
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Debug|x86.Build.0 = Debug|x86
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Release|x64.ActiveCfg = Release|x64
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Release|x64.Build.0 = Release|x64
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Release|x86.ActiveCfg = Release|x86
+		{1CF8BDFA-4C93-41D8-A83B-E476CA5C8493}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B9170F4-A53C-4052-9991-254D089FC143}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+﻿//Script GUID:7cd1a276-ef95-456c-b78a-529a0ab46c50
+//Used for tracking history
+[SCRIPT:MAXDOP=0]
+
+#DECLARE captureLineItems string = @"shares/cp.prod/cp.prod/CashFlow/Ingestion/Output/DunningJournal20160630/2018/09/CaptureScheduleLineItems_2018_09_27.ss";
+
+/* summaryVersions = SELECT DISTINCT CaptureScheduleVersion, COUNT(*) AS count
+    FROM
+    (
+        SSTREAM @captureScheduleEvents
+    )
+    //WHERE AccountId == "000011f6-eddf-456d-8574-d5e2e8796d80";
+    //WHERE EventType == "capture_attempted"
+    AND Event LIKE "%succeeded%";
+*/
+
+captureSchedule = SELECT CaptureSchedule 
+    FROM
+        (
+            SSTREAM @captureScheduleSummary
+        )
+    WHERE CaptureScheduleId == "ea23f647617eb95d1a2af9f6c59ab058";
+
+OUTPUT captureSchedule TO CONSOLE;

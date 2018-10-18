@@ -1,0 +1,18 @@
+﻿//Script GUID:fa1cc578-a471-481e-8318-9e45ef33086e
+//Used for tracking history
+[SCRIPT:MAXDOP=0]
+
+#DECLARE dunningChurnStream string = @"local/Cst/Dunning/jabraham/XBLChurnModernSchedules.ss";
+
+dailyAllUp =
+    SELECT Classification
+    FROM
+    (
+        SSTREAM @dunningChurnStream
+    )
+    WHERE AccountId == "000011f6-eddf-456d-8574-d5e2e8796d80";
+
+#DECLARE dailyCounts = "test";
+
+
+OUTPUT dailyAllUp TO CONSOLE;

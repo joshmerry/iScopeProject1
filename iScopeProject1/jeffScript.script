@@ -1,0 +1,26 @@
+﻿//Script GUID:fa1cc578-a471-481e-8318-9e45ef33086e
+//Used for tracking history
+[SCRIPT:MAXDOP=0]
+
+#DECLARE dailyAllUpStream string = @"shares/cp.prod/cp.prod/CashFlow/Ingestion/Output/DunningJournal20160630/2018/09/CaptureScheduleSummary_2018_09_01.ss";
+
+dailyAllUp =
+    SELECT *
+    FROM
+    (
+        SSTREAM @dailyAllUpStream
+    )
+    WHERE Expiration == 42 AND (State == "failed" OR State == "succeeded");
+
+dailyAllUpNonRetryable =
+    SELECT *
+    FROM dailyAllUp
+    WHERE CaptureSchedule LIKE "%non_retryable_charge_decline%" AND CaptureSchedule NOT LIKE "%abandon%";
+
+dailyCounts =
+    SELECT DISTINCT State,
+                    COUNT( * ) AS Counts
+    FROM dailyAllUpNonRetryable;
+
+
+OUTPUT dailyCounts TO CONSOLE;

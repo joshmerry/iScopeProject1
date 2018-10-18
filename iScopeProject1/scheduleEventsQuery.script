@@ -1,0 +1,22 @@
+﻿//Script GUID:7cd1a276-ef95-456c-b78a-529a0ab46c50
+//Used for tracking history
+[SCRIPT:MAXDOP=0]
+
+#DECLARE captureScheduleEventStream string = @"shares/cp.prod/cp.prod/CashFlow/Ingestion/Output/DunningJournal20160630/2018/09/CaptureScheduleEvents_2018_09_27.ss";
+
+captureScheduleEvents =
+    SELECT Event
+    FROM
+    (
+        SSTREAM @captureScheduleEventStream
+    )
+    //WHERE AccountId == "000011f6-eddf-456d-8574-d5e2e8796d80";
+    //WHERE EventType == "capture_attempted"
+    //WHERE Event LIKE "%non_retryable_charge_decline%";
+    //WHERE CaptureScheduleId == "5e222596ea6030ad80aa1c2879c0c300";
+    WHERE CaptureScheduleEventId == "3a423ece-0e1c-45eb-bf81-374350cbf844";
+
+
+
+
+OUTPUT captureScheduleEvents TO CONSOLE;

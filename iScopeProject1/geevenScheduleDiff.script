@@ -1,0 +1,41 @@
+﻿//Script GUID:8fc6fb62-9b98-48c9-8a21-5939bf23bc6c
+//Used for tracking history
+[SCRIPT:MAXDOP=0]
+
+#DECLARE StartDateString string = "2018-08-18";
+#DECLARE EndDateString string = "2018-08-19";
+
+AllUpBadSchedulesNew =
+        SSTREAM
+        STREAMSET @"shares/cp.prod.activityreports/cp.prod.activityreports/CashFlow/Dunning/Health/"
+        PATTERN @"%Y/%m/AllUpBadSchedules_%Y_%m_%d.ss"
+        RANGE __date = [@EndDateString, @EndDateString];
+
+AllUpBadSchedulesOld =
+        SSTREAM
+        STREAMSET @"shares/cp.prod.activityreports/cp.prod.activityreports/CashFlow/Dunning/Health/"
+        PATTERN @"%Y/%m/AllUpBadSchedules_%Y_%m_%d.ss"
+        RANGE __date = [@StartDateString, @StartDateString];
+
+#DECLARE NewlyBadSchedulesOutput string = String.Format(@"/local/Cst/Dunning/alread/NewlyBadSchedules_{0}_{1}.tsv", @StartDateString.Replace("-", "_"), @EndDateString.Replace("-", "_"));
+#DECLARE PreviouslyBadSchedulesOutput string = String.Format(@"/local/Cst/Dunning/alread/PreviouslyBadSchedules_{0}_{1}.tsv", @StartDateString.Replace("-", "_"), @EndDateString.Replace("-", "_"));
+
+newlyBadSchedules =
+    SELECT AllUpBadSchedulesNew.*, "New" AS OldOrNew, AllUpBadSchedulesOld.Reason AS PreviousReason, AllUpBadSchedulesNew.Reason AS NewReason
+    FROM AllUpBadSchedulesNew
+         LEFT JOIN
+             AllUpBadSchedulesOld
+         ON AllUpBadSchedulesNew.AccountId == AllUpBadSchedulesOld.AccountId AND AllUpBadSchedulesNew.ScheduleId == AllUpBadSchedulesOld.ScheduleId
+    WHERE AllUpBadSchedulesOld.AccountId IS NULL OR AllUpBadSchedulesNew.Reason != AllUpBadSchedulesOld.Reason;
+
+previouslyBadSchedules =
+    SELECT AllUpBadSchedulesOld.*, "Old" AS OldOrNew, AllUpBadSchedulesOld.Reason AS PreviousReason, AllUpBadSchedulesNew.Reason AS NewReason
+    FROM AllUpBadSchedulesOld
+         LEFT JOIN
+             AllUpBadSchedulesNew
+         ON AllUpBadSchedulesOld.AccountId == AllUpBadSchedulesNew.AccountId AND AllUpBadSchedulesOld.ScheduleId == AllUpBadSchedulesNew.ScheduleId
+    WHERE AllUpBadSchedulesNew.AccountId IS NULL OR AllUpBadSchedulesNew.Reason != AllUpBadSchedulesOld.Reason;
+
+allBadSchedulesDiff = SELECT * FROM previouslyBadSchedules UNION SELECT * FROM newlyBadSchedules;
+
+OUTPUT allBadSchedulesDiff TO CONSOLE;
